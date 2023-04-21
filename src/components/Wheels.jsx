@@ -10,8 +10,7 @@ const Wheels = () => {
   const [formData, setFormData] = useState(
     JSON.parse(localStorage.getItem("form"))
   );
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const getOption = async () => {
     const result = await axios.get(
@@ -29,6 +28,11 @@ const Wheels = () => {
     } else {
       console.log(formData);
       let preForms = [...formData];
+      if (preForms && preForms.length > 0) {
+        preForms = preForms.filter(
+          (item) => item.question !== "Number of Wheels"
+        );
+      }
       let formQA = { question: "Number of Wheels", answers: selected };
       preForms.push(formQA);
       setFormData(preForms);
