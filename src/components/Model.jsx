@@ -32,7 +32,7 @@ const Model = () => {
       }
     }
 
-    console.log(results);
+    // console.log(results);
     setModel(results);
   };
 

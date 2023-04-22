@@ -31,7 +31,6 @@ const Picker = () => {
     var results = [];
     let data = await getDataById(formData[3].answers);
     results = data?.data?.data;
-    console.log(results);
     if (results && results.length > 0) {
       results.map((item) => {
         let startDate = new Date(item.startDate);
@@ -39,7 +38,7 @@ const Picker = () => {
         var newend = endDate.setDate(endDate.getDate() + 1);
         endDate = new Date(newend);
         while (startDate < endDate) {
-          console.log(startDate);
+          // console.log(startDate);
           var newDate = startDate.setDate(startDate.getDate() + 1);
           startDate = new Date(newDate);
         }
@@ -71,6 +70,7 @@ const Picker = () => {
       toast.success("Your vehicle is booked", {
         position: "top-center"
       });
+      navigate("/");
     }
   };
 

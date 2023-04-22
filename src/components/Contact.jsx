@@ -12,7 +12,7 @@ const Contact = () => {
   });
 
   const [data, setData] = useState([]);
-  console.log(inpval);
+  // console.log(inpval);
   const navigate = useNavigate();
 
   const getdata = (e) => {
@@ -40,7 +40,8 @@ const Contact = () => {
         position: "top-center"
       });
     } else {
-      console.log("data added succesfully");
+      // console.log("data added succesfully");
+      localStorage.removeItem("form");
       localStorage.setItem(
         "form",
         JSON.stringify([

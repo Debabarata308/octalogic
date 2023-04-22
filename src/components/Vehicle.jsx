@@ -19,17 +19,17 @@ const Vehicle = () => {
 
     let tempDataHolder = [];
     if (formData && formData.length > 0) {
-      console.log(result.data.data);
+      // console.log(result.data.data);
       formData.map((item) => {
         result.data.data.filter((il) => {
           if (item && item.answers == il.wheels) {
-            console.log(il);
+            // console.log(il);
             tempDataHolder.push(il);
           }
         });
       });
     }
-    console.log(tempDataHolder);
+    // console.log(tempDataHolder);
     setVehicle(tempDataHolder);
   };
 

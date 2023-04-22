@@ -20,13 +20,13 @@ const Wheels = () => {
   };
 
   const addoption = () => {
-    console.log("dsfs");
+    // console.log("dsfs");
     if (selected === "") {
       toast.error(" fill is Redio button!", {
         position: "top-center"
       });
     } else {
-      console.log(formData);
+      // console.log(formData);
       let preForms = [...formData];
       if (preForms && preForms.length > 0) {
         preForms = preForms.filter(
