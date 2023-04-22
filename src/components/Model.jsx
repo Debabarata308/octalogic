@@ -67,7 +67,7 @@ const Model = () => {
   }, []);
 
   return (
-    <div className="container" style={{ marginLeft: "25%", marginTop: "5%" }}>
+    <div className="container" style={{ marginLeft: "20%", marginTop: "5%" }}>
       <div className="row ">
         <div className="col">
           <h4>Please select model: </h4>

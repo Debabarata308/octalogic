@@ -70,7 +70,6 @@ const Picker = () => {
       toast.success("Your vehicle is booked", {
         position: "top-center"
       });
-      navigate("/");
     }
   };
 
@@ -80,7 +79,7 @@ const Picker = () => {
   }, []);
 
   return (
-    <div className="container" style={{ marginLeft: "25%", marginTop: "5%" }}>
+    <div className="container" style={{ marginLeft: "20%", marginTop: "5%" }}>
       <div className="row ">
         <div className="col">
           <h4>Please select booking start/end date: </h4>
@@ -108,7 +107,7 @@ const Picker = () => {
           />
         </div>
       </div>
-      <div className="row">
+      <div className="row d-block">
         <div className="col">
           <Button
             variant="dark"
@@ -117,6 +116,16 @@ const Picker = () => {
             style={{ width: "420px" }}
           >
             Book
+          </Button>
+        </div>
+        <div className="col mt-2">
+          <Button
+            variant="secondary"
+            type="submit"
+            onClick={() => navigate("/")}
+            style={{ width: "420px" }}
+          >
+            Home
           </Button>
         </div>
       </div>
