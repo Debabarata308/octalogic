@@ -22,20 +22,29 @@ const Picker = () => {
 
   const getDataById = async (id) => {
     let data = await axios.get(
-      "https://octalogic-test-frontend.vercel.app/api/v1/vehicles/" + id
+      "https://octalogic-test-frontend.vercel.app/api/v1/bookings/" + id
     );
     return data;
   };
 
   const getOption = async () => {
     var results = [];
-    if (vehicle && vehicle.vehicles && vehicle.vehicles.length > 0) {
-      for (let i = 0; i < vehicle.vehicles.length; i++) {
-        let data = await getDataById(vehicle.vehicles[i].id);
-        results.push(data?.data?.data);
-      }
+    let data = await getDataById(formData[3].answers);
+    results = data?.data?.data;
+    console.log(results);
+    if (results && results.length > 0) {
+      results.map((item) => {
+        let startDate = new Date(item.startDate);
+        let endDate = new Date(item.endDate);
+        var newend = endDate.setDate(endDate.getDate() + 1);
+        endDate = new Date(newend);
+        while (startDate < endDate) {
+          console.log(startDate);
+          var newDate = startDate.setDate(startDate.getDate() + 1);
+          startDate = new Date(newDate);
+        }
+      });
     }
-
     setModel(results);
   };
 
@@ -107,7 +116,7 @@ const Picker = () => {
             onClick={() => addoption()}
             style={{ width: "420px" }}
           >
-            Next
+            Book
           </Button>
         </div>
       </div>
