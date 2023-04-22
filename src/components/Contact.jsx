@@ -52,39 +52,52 @@ const Contact = () => {
     }
   };
   return (
-    <div>
-      <h2>First, Whats your name ?</h2>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="fname"
-            onChange={getdata}
-            placeholder="Enter Your Name"
-            style={{ width: "420px" }}
-          />
-        </Form.Group>
+    <div className="container" style={{ marginLeft: "25%", marginTop: "5%" }}>
+      <div className="row ">
+        <div className="col">
+          <h4>First, Whats your name ? </h4>
+        </div>
+      </div>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="lname"
-            onChange={getdata}
-            placeholder="Enter Your Last Name"
+      <div className="row d-inline-flex mb-4 mt-4">
+        <div className="col">
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="fname"
+                onChange={getdata}
+                placeholder="Enter Your Name"
+                style={{ width: "420px" }}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="lname"
+                onChange={getdata}
+                placeholder="Enter Your Last Name"
+                style={{ width: "420px" }}
+              />
+            </Form.Group>
+          </Form>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <Button
+            variant="dark"
+            type="submit"
+            onClick={addData}
             style={{ width: "420px" }}
-          />
-        </Form.Group>
-        <Button
-          variant="dark"
-          type="submit"
-          onClick={addData}
-          style={{ width: "420px" }}
-        >
-          Next
-        </Button>
-      </Form>
+          >
+            Next
+          </Button>
+        </div>
+      </div>
       <ToastContainer />
     </div>
   );

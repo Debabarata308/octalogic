@@ -41,19 +41,20 @@ const Model = () => {
       toast.error(" fill is Redio button!", {
         position: "top-center"
       });
+    } else {
+      let preForms = [...formData];
+      if (preForms && preForms.length > 0) {
+        preForms = preForms.filter(
+          (item) => item.question !== "Please select model:"
+        );
+      }
+      let formQA = { question: "Please select model:", answers: selected };
+      preForms.push(formQA);
+      setFormData(preForms);
+      localStorage.removeItem("form");
+      localStorage.setItem("form", JSON.stringify(preForms));
+      navigate("/picker");
     }
-    let preForms = [...formData];
-    if (preForms && preForms.length > 0) {
-      preForms = preForms.filter(
-        (item) => item.question !== "Please select model:"
-      );
-    }
-    let formQA = { question: "Please select model:", answers: selected };
-    preForms.push(formQA);
-    setFormData(preForms);
-    localStorage.removeItem("form");
-    localStorage.setItem("form", JSON.stringify(preForms));
-    navigate("/picker");
   };
   const handleSelected = async (id) => {
     let data = await getDataById(id);
@@ -66,51 +67,64 @@ const Model = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Please select model: </h1>
-      {model.map((val, i) => {
-        return (
-          <div key={i}>
-            <div className="row">
-              <div className="col d-inline-flex">
-                <div className="row d-block" style={{ marginLeft: 5 }}>
-                  <div className="col" style={{ marginTop: "2rem" }}>
-                    <input
-                      type="radio"
-                      value={val.id}
-                      name="vehicle"
-                      checked={selected === `${val.id}`}
-                      onChange={(e) => handleSelected(e.target.value)}
-                    />
-                  </div>
-                </div>
+    <div className="container" style={{ marginLeft: "25%", marginTop: "5%" }}>
+      <div className="row ">
+        <div className="col">
+          <h4>Please select model: </h4>
+        </div>
+      </div>
 
-                <div className="row d-block" style={{ marginLeft: 5 }}>
-                  <div className="col">
-                    <img
-                      src={val.image.publicURL}
-                      className="img-fluid"
-                      alt={val.image.key}
-                      style={{ height: "5rem", width: "8rem" }}
-                    />
-                  </div>
-                  <div className="col">
-                    <label>{val.name}</label>
+      <div className="row d-inline-flex mb-4 mt-4">
+        <div className="col">
+          {model.map((val, i) => {
+            return (
+              <div key={i}>
+                <div className="row">
+                  <div className="col d-inline-flex">
+                    <div className="row d-block" style={{ marginLeft: 5 }}>
+                      <div className="col" style={{ marginTop: "2rem" }}>
+                        <input
+                          type="radio"
+                          value={val.id}
+                          name="vehicle"
+                          checked={selected === `${val.id}`}
+                          onChange={(e) => handleSelected(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row d-block" style={{ marginLeft: 5 }}>
+                      <div className="col">
+                        <img
+                          src={val.image.publicURL}
+                          className="img-fluid"
+                          alt={val.image.key}
+                          style={{ height: "5rem", width: "8rem" }}
+                        />
+                      </div>
+                      <div className="col">
+                        <label>{val.name}</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
-      <Button
-        variant="dark"
-        type="submit"
-        onClick={() => addoption()}
-        style={{ width: "420px" }}
-      >
-        Next
-      </Button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <Button
+            variant="dark"
+            type="submit"
+            onClick={() => addoption()}
+            style={{ width: "420px" }}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
       <ToastContainer />
     </div>
   );

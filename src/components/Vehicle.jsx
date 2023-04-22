@@ -38,51 +38,77 @@ const Vehicle = () => {
       toast.error(" fill is Redio button!", {
         position: "top-center"
       });
+    } else {
+      localStorage.removeItem("vehicle");
+      localStorage.setItem("vehicle", JSON.stringify(vehicle[0]));
+      let preForms = [...formData];
+      if (preForms && preForms.length > 0) {
+        preForms = preForms.filter(
+          (item) => item.question !== "Number of Vehicles"
+        );
+      }
+      let formQA = { question: "Number of Vehicles", answers: vehicle[0] };
+      preForms.push(formQA);
+      setFormData(preForms);
+      localStorage.removeItem("form");
+      localStorage.setItem("form", JSON.stringify(preForms));
+      navigate("/model");
     }
-    localStorage.removeItem("vehicle");
-    localStorage.setItem("vehicle", JSON.stringify(vehicle[0]));
-    let preForms = [...formData];
-    if (preForms && preForms.length > 0) {
-      preForms = preForms.filter(
-        (item) => item.question !== "Number of Vehicles"
-      );
-    }
-    let formQA = { question: "Number of Vehicles", answers: vehicle[0] };
-    preForms.push(formQA);
-    setFormData(preForms);
-    localStorage.removeItem("form");
-    localStorage.setItem("form", JSON.stringify(preForms));
-    navigate("/model");
   };
   useEffect(() => {
     getOption();
   }, []);
 
   return (
-    <div>
-      <h1>Number of Vehicles</h1>
-      {vehicle.map((val, i) => {
-        return (
-          <div key={i}>
-            <input
-              type="radio"
-              value={val.type}
-              name="wheels"
-              checked={selected === `${val.type}`}
-              onChange={(e) => setSelected(e.target.value)}
-            />
-            <label>{val.type}</label>
-          </div>
-        );
-      })}
-      <Button
-        variant="dark"
-        type="submit"
-        onClick={() => addoption()}
-        style={{ width: "420px" }}
-      >
-        Next
-      </Button>
+    <div className="container" style={{ marginLeft: "25%", marginTop: "5%" }}>
+      <div className="row ">
+        <div className="col">
+          <h4>Please select Vehicle: </h4>
+        </div>
+      </div>
+
+      <div className="row d-inline-flex mb-4 mt-4">
+        <div className="col">
+          {vehicle.map((val, i) => {
+            return (
+              <div key={i}>
+                <div className="row">
+                  <div className="col d-inline-flex">
+                    <div className="row d-block" style={{ marginLeft: 5 }}>
+                      <div className="col">
+                        <input
+                          type="radio"
+                          value={val.type}
+                          name="vehicle"
+                          checked={selected === `${val.type}`}
+                          onChange={(e) => setSelected(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="row " style={{ marginLeft: 5 }}>
+                      <div className="col">
+                        <label>{val.type}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <Button
+            variant="dark"
+            type="submit"
+            onClick={() => addoption()}
+            style={{ width: "420px" }}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
       <ToastContainer />
     </div>
   );

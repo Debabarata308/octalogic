@@ -44,22 +44,25 @@ const Picker = () => {
       toast.error(" fill is Redio button!", {
         position: "top-center"
       });
+    } else {
+      let preForms = [...formData];
+      if (preForms && preForms.length > 0) {
+        preForms = preForms.filter(
+          (item) => item.question !== "Please select booking start/end date:"
+        );
+      }
+      let formQA = {
+        question: "Please select booking start/end date:",
+        answers: { startDate: startDate, endDate: endDate }
+      };
+      preForms.push(formQA);
+      setFormData(preForms);
+      localStorage.removeItem("form");
+      localStorage.setItem("form", JSON.stringify(preForms));
+      toast.success("Your vehicle is booked", {
+        position: "top-center"
+      });
     }
-    let preForms = [...formData];
-    if (preForms && preForms.length > 0) {
-      preForms = preForms.filter(
-        (item) => item.question !== "Please select booking start/end date:"
-      );
-    }
-    let formQA = {
-      question: "Please select booking start/end date:",
-      answers: { startDate: startDate, endDate: endDate }
-    };
-    preForms.push(formQA);
-    setFormData(preForms);
-    localStorage.removeItem("form");
-    localStorage.setItem("form", JSON.stringify(preForms));
-    alert("Your vehicle is booked (:");
   };
 
   useEffect(() => {
@@ -68,10 +71,10 @@ const Picker = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="row">
+    <div className="container" style={{ marginLeft: "25%", marginTop: "5%" }}>
+      <div className="row ">
         <div className="col">
-          <h1>Please select booking start/end date: </h1>
+          <h4>Please select booking start/end date: </h4>
         </div>
       </div>
 
